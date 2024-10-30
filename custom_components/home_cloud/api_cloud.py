@@ -144,9 +144,10 @@ class ApiCloud():
         return res['data']
 
     def getSkill(self, skill_name):
-        for skill in self._skill_list:
-            if skill['skill_name'] == skill_name:
-                return skill
+        if self._skill_list is not None:
+            for skill in self._skill_list:
+                if skill['skill_name'] == skill_name:
+                    return skill
 
     async def setHassLink(self, hassLink):
         return await self.http_post(self.get_url('/user/setHassLink'), {
