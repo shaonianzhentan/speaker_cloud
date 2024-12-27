@@ -400,6 +400,7 @@ class XiaoduDeviceBase():
             if mode == 'MUTE':
                 self.call_entity('volume_mute', {'is_volume_muted': True})
 
+
     def UnsetMode(self, mode):
         if self.domain == 'climate':
             self.call_entity('set_fan_mode', {'hvac_mode': 'auto'})
@@ -414,11 +415,15 @@ class XiaoduDeviceBase():
         ''' 风速高 '''
         if self.domain == 'climate':
             self.call_entity('set_fan_mode', {'fan_mode': 'high'})
+        elif self.domain == 'fan':
+            self.call_entity('increase_speed', {})
 
     def DecrementFanSpeed(self, deltaValue):
         ''' 风速低 '''
         if self.domain == 'climate':
             self.call_entity('set_fan_mode', {'fan_mode': 'low'})
+        elif self.domain == 'fan':
+            self.call_entity('decrease_speed', {})
 
     def SetFanSpeed(self, payload: XiaoduParams):
         ''' 设置风速 '''
@@ -430,8 +435,7 @@ class XiaoduDeviceBase():
                     fan_modes = self.entity.attributes.get('fan_modes')
                     if fan_modes and len(fan_modes) > fan_mode:
                         fan_mode = fan_modes[fan_mode].lower()
-                        self.call_entity('set_fan_mode', {
-                                         'fan_mode': fan_mode})
+                        self.call_entity('set_fan_mode', { 'fan_mode': fan_mode})
 
     def IncrementVolume(self, deltaValue):
         if self.domain == 'media_player':

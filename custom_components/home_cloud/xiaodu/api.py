@@ -17,6 +17,7 @@ from .tv_set import XiaoduTVSet
 from .ott_box import XiaoduOttBox
 
 from .air_condition import XiaoduAirCondition
+from .air_purifier import XiaoduAirPurifier
 from .scene_trigger import XiaoduSceneTrigger
 from .activity_trigger import XiaoduActivityTrigger
 
@@ -53,6 +54,8 @@ class XiaoduDevice(XiaoduDeviceBase):
                 return XiaoduOttBox(self.entity_id)
         elif domain == 'climate':
             return XiaoduAirCondition(self.entity_id)
+        elif domain == 'fan':
+            return XiaoduAirPurifier(self.entity_id)
         elif domain == 'scene':
             return XiaoduSceneTrigger(self.entity_id)
         elif domain == 'script':
